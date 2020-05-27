@@ -6,7 +6,7 @@ Slack chatbot integrations for the [SOCless framework](https://twilio-labs.githu
 
 ## Prerequisites
 
-- A Slack instance
+- A Slack instance.
 - Permissions to create a Slack bot
 - Socless Automation Framework deployed in an AWS Account
 
