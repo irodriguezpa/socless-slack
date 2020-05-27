@@ -10,6 +10,30 @@ Slack chatbot integrations for the [SOCless framework](https://twilio-labs.githu
 - Permissions to create a Slack bot
 - Socless Automation Framework deployed in an AWS Account
 
+## Initial configuration
+
+Run:
+```bash
+$ npm install
+````
+
+In order to install the required node dependencies.
+
+## Deploy to Dev and Prod
+Deploy your application to dev and prod by running the commands below.
+To dev:
+```
+npm run dev
+```
+
+To prod:
+```
+npm run prod
+```
+Feel free to deploy to any other Socless environment you have configured
+
+If your Socless deployment is successful, you will see a URL that ends in `/slack` in your `endpoints` section. This is your `Slack Endpoint URL`. Copy this URL. You will need it in the next section
+
 ## Setting up a Slack bot
 
 This integration requires a Slack bot setup and configured.
@@ -56,40 +80,6 @@ To configure the parameters,
 9. Click "Create Parameter"
 
 Repeat the process for all parameters that need to be configured.
-
-## Deploy socless-slack
-
-Clone this repository to your projects folder using the command below
-
-```
-git clone git@github.com:twilio-labs/socless-slack.git
-```
-
-Change into the `socless-slack` repository and setup deployment dependencies by running the commands below
-
-```
-npm install
-virtualenv venv
-. venv/bin/activate
-```
-
-## (Optional) Ensure Your Dev/Prod environment matches your Socless Dev/Prod regions
-Open the package.json and ensure your `config` and `scripts` match what you have configured for your Socless deployment
-
-## Deploy to Dev and Prod
-Deploy your application to dev and prod by running the commands below.
-To dev:
-```
-npm run dev
-```
-
-To prod:
-```
-npm run prod
-```
-Feel free to deploy to any other Socless environment you have configured
-
-If your Socless deployment is successful, you will see a URL that ends in `/slack` in your `endpoints` section. This is your `Slack Endpoint URL`. Copy this URL. You will need it in the next section
 
 ## Configure Interactive Components
 1. Return to the "Basic Information" page for your Slackbot on api.slack.com
