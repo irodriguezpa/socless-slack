@@ -9,7 +9,9 @@ provider:
   versionFunctions: false
   memorySize: 128
   timeout: 30
-  role: ${{cf:${{self:custom.socless}}.LambdaExecutionRoleArn}}
+  deploymentBucket: socless-${{opt:stage}}-deployments
+  deploymentPrefix: slack
+  role: ${{ssm:/socless/iam/arn}}
   environment:
     SOCLESS_VAULT: ${{cf:${{self:custom.socless}}.SoclessVault}}
     RESULTS_TABLE: ${{cf:${{self:custom.socless}}.ExecutionResultsTable}}
@@ -17,13 +19,13 @@ provider:
     SOCLESS_MESSAGE_RESPONSE_TABLE: ${{cf:${{self:custom.socless}}.MessageResponsesTable}}
     MESSAGE_RESPONSES_TABLE: ${{cf:${{self:custom.socless}}.MessageResponsesTable}}
     SOCLESS_BOT_TOKEN: ${{ssm:/socless/slack/bot_token~true}}
-    SOCLESS_USER_TOKEN: ${{ssm:/socless/slack/bot_token_user~true}}
+    #SOCLESS_USER_TOKEN: ${{ssm:/socless/slack/bot_token_user~true}}
 
   vpc:
     securityGroupIds:
-      - ${{cf:${{self:custom.socless}}.LambdaVpcSG}}
+      - ${{ssm:/socless/${{opt:stage}}/sgId}}
     subnetIds:
-      - ${{cf:${{self:custom.socless}}.PrivateFunctionSubnet}}
+      - ${{ssm:/socless/${{opt:stage}}/privateSubnet}}
   apiGateway:
     restApiId: ${{cf:${{self:custom.socless}}.APIGatewayID}}
     restApiRootResourceId: ${{cf:${{self:custom.socless}}.APIGatewayRootResourceId}}
