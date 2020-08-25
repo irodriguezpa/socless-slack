@@ -50,6 +50,7 @@ def handle_state(context, trigger_id, title, elements, receiver='', submit_label
     json_resp = resp.json()
 
     if not json_resp["ok"]:
+        print(json_resp)
         raise Exception(json_resp['error'])
 
     if not USE_NEW_INTERACTION:
