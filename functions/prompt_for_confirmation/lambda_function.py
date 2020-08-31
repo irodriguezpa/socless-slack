@@ -42,6 +42,8 @@ def handle_state(context, target_type, target, text, receiver='', prompt_text=''
     context['_message_id'] = message_id
     text = socless_template_string(text, context)
     prompt_text = socless_template_string(prompt_text, context)
+    yes_text = socless_template_string(yes_text, context)
+    no_text = socless_template_string(no_text, context)
 
     ATTACHMENT_TEMPLATE['text'] = "*{}*".format(prompt_text)
     ATTACHMENT_TEMPLATE['callback_id'] = message_id
