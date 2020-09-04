@@ -70,12 +70,12 @@ functions:
           path: /slack
           method: post
           cors: true
-      - schedule:
-          name: SlackEndpointWarmStart_SOC
-          description: Triggers SlackEndpoint every 5 minutes to keep it warm
-          rate: cron(0/5 * * * ? *)
-          enabled: ${{self:custom.scheduleEnabled.${{self:provider.stage}}}}
-          input: {"_keepwarm": true}
+      # - schedule:
+      #     name: SlackEndpointWarmStart_SOC
+      #     description: Triggers SlackEndpoint every 5 minutes to keep it warm
+      #     rate: cron(0/5 * * * ? *)
+      #     enabled: ${{self:custom.scheduleEnabled.${{self:provider.stage}}}}
+      #     input: {"_keepwarm": true}
 
   FindUser:
     handler: lambda_function.lambda_handler
@@ -120,7 +120,6 @@ functions:
     handler: lambda_function.lambda_handler
     name: _socless_slack_send_dialog
     description: Send a dialog into Slack
-    provisionedConcurrency: 5
     environment:
       SAVE_MESSAGE_RESPONSE_MACHINE: ${{cf:${{self:custom.socless}}.SaveMessageResponseTaskToken}}
     package:
