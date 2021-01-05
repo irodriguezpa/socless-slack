@@ -3,7 +3,7 @@ from socless.utils import gen_id
 from slack_helpers import find_user, get_channel_id, slack_client
 
 
-def handle_state(context, target_type, target, text, receiver='', prompt_text='', yes_text='Yes', no_text='No'):
+def handle_state(context, target_type, target, text, receiver='', prompt_text='', yes_text='', no_text=''):
     """
     Send a Slack Message and store the message id for the message
     """
@@ -47,9 +47,13 @@ def handle_state(context, target_type, target, text, receiver='', prompt_text=''
 
     ATTACHMENT_TEMPLATE['text'] = "*{}*".format(prompt_text)
     ATTACHMENT_TEMPLATE['callback_id'] = message_id
-    ATTACHMENT_YES_ACTION['text'] = yes_text
-    ATTACHMENT_NO_ACTION['text'] = no_text
-    ATTACHMENT_TEMPLATE['actions'] = [ATTACHMENT_YES_ACTION, ATTACHMENT_NO_ACTION]
+    ATTACHMENT_TEMPLATE['actions'] = []
+    if yes_text:
+        ATTACHMENT_YES_ACTION['text'] = yes_text
+        ATTACHMENT_TEMPLATE['actions'].append(ATTACHMENT_YES_ACTION)
+    if no_text:
+        ATTACHMENT_NO_ACTION['text'] = no_text
+        ATTACHMENT_TEMPLATE['actions'].append(ATTACHMENT_NO_ACTION)
 
     payload = {
         "text": text,
